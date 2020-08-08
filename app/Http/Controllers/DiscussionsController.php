@@ -53,7 +53,7 @@ class DiscussionsController extends Controller
 
         session()->flash('success', 'Discussion created!');
 
-        return redirect()->route('discussion.index');
+        return redirect()->route('discussions.index');
     }
 
     /**

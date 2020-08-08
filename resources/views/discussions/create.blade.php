@@ -2,14 +2,14 @@
 
 @section('content')
             <div class="d-flex justify-content-end mb-2">
-                <a href="{{ route('discussion.create') }}" class="btn btn-success">Add Discusion</a>   
+                <a href="{{ route('discussions.create') }}" class="btn btn-success">Add Discusion</a>   
             </div> 
 
             <div class="card">
                 <div class="card-header">Add a Discussion</div>
 
                 <div class="card-body">
-                    <form action="{{ route('discussion.store') }}" method="POST">
+                    <form action="{{ route('discussions.store') }}" method="POST">
                     @csrf
 
                     <div class="form-group">
