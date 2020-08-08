@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Discussion;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class DiscussionsController extends Controller
 {
@@ -13,7 +16,7 @@ class DiscussionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('discussions.index', ['discussions' => Discussion::paginate(5)]);
     }
 
     /**
@@ -34,7 +37,23 @@ class DiscussionsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'channel' => 'required'
+        ]);
+
+        Discussion::create([
+            'title' => $request->title,
+            'slug' => Str::slug($request->title),
+            'content' => $request->content,
+            'channel_id' => $request->channel,
+            'user_id' => Auth::id(),
+        ]);
+
+        session()->flash('success', 'Discussion created!');
+
+        return redirect()->route('discussion.index');
     }
 
     /**

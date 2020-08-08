@@ -9,7 +9,9 @@
                 <div class="card-header">Add a Discussion</div>
 
                 <div class="card-body">
-                    
+                    <form action="{{ route('discussion.store') }}" method="POST">
+                    @csrf
+
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" class="form-control" name="title" value="">
@@ -31,6 +33,7 @@
 
                     <button class="btn btn-success" type="submit">Create Discussion</button>
 
+                    </form>
                 </div>
             </div>
 
