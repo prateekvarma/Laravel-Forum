@@ -8,7 +8,7 @@
             @foreach($discussions as $discussion)
             <div class="card">
                 <div class="card-header">{{ $discussion->title }} by {{ $discussion->user->name }}
-                <a href="{{ route('discussions.show', $discussion->slug) }}" class="btn btn-small btn-success">View</a>
+                <a href="{{ route('discussions.show', $discussion->slug) }}" class="btn btn-sm btn-success float-right">View</a>
                 </div>
 
                 <div class="card-body">

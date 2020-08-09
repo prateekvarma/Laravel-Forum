@@ -10,8 +10,27 @@
 
                 <div class="card-body">
                     {{ $discussion->content }}
-                    <br>
+                    <hr>
                     <b>Posted by : {{ $discussion->user->name }}</b>
+                </div>
+            </div>
+            <br>
+            <div class="card">
+                <div class="card-header">
+                    Add a reply
+                </div>
+
+                <div class="card-body">
+                @auth
+                    <form action="{{ route('reply.store', $discussion->slug) }}" method="post">
+                        @csrf 
+                        <textarea name="reply" id="reply" cols="80" rows="10"></textarea>
+                        <br>
+                        <button class="btn btn-success" type="submit">Post Reply</button>
+                    </form>
+                @else
+                <a href="{{ route('login') }}" class="btn btn-info">Login to reply</a>   
+                @endauth 
                 </div>
             </div>
 
