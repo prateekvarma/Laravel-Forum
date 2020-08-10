@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Reply;
+use Illuminate\Support\Facades\Auth;
+use App\Discussion;
 
 class ReplyController extends Controller
 {
@@ -32,9 +35,15 @@ class ReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Discussion $discussion)
     {
-        //
+        Reply::create([
+            'content' => $request->content,
+            'discussion_id' => $discussion->id,
+            'user_id' => Auth::id(),
+        ]);
+
+        return redirect()->back();
     }
 
     /**

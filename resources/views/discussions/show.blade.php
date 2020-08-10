@@ -15,6 +15,19 @@
                 </div>
             </div>
             <br>
+            @foreach($discussion->reply as $replies)
+            <div class="card">
+                <div class="card-header">
+                    Replies
+                </div>
+                <div class="card-body">
+                    {{ $replies->content }}
+                    <hr>
+                    <b>Replied by : {{ $replies->user->name }} </b> 
+                </div>
+            </div>
+            @endforeach    
+            <br>
             <div class="card">
                 <div class="card-header">
                     Add a reply
@@ -24,7 +37,7 @@
                 @auth
                     <form action="{{ route('reply.store', $discussion->slug) }}" method="post">
                         @csrf 
-                        <textarea name="reply" id="reply" cols="80" rows="10"></textarea>
+                        <textarea name="content" id="content" cols="80" rows="10"></textarea>
                         <br>
                         <button class="btn btn-success" type="submit">Post Reply</button>
                     </form>
