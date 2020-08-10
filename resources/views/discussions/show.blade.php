@@ -15,22 +15,22 @@
                 </div>
             </div>
             <br>
-            @foreach($discussion->reply as $replies)
+            @foreach($discussion->reply()->paginate(3) as $replies)
             <div class="card">
                 <div class="card-header">
-                    Replies
+                <b>Replied by : {{ $replies->user->name }} </b>
                 </div>
                 <div class="card-body">
                     {{ $replies->content }}
-                    <hr>
-                    <b>Replied by : {{ $replies->user->name }} </b> 
                 </div>
             </div>
-            @endforeach    
+            @endforeach
+            <br>
+            {{ $discussion->reply()->paginate(3)->links() }}    
             <br>
             <div class="card">
                 <div class="card-header">
-                    Add a reply
+                    <b>Add a reply</b>
                 </div>
 
                 <div class="card-body">
