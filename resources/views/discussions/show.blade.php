@@ -6,10 +6,27 @@
             </div> 
 
             <div class="card">
-                <div class="card-header">{{ $discussion->title }}</div>
+                <div class="card-header">{{ $discussion->title }}  
+                    @if($discussion->hasBestReply)
+                        <b class="float-right">*Best reply marked</b>  
+                    @endif
+
+                </div>
 
                 <div class="card-body">
                     {{ $discussion->content }}
+                    <hr>
+                    @if($discussion->hasBestReply)
+                    <div class="card bg-success text-white">
+                        <div class="card-header">
+                            <b>Best Reply</b>
+                        </div>
+
+                        <div class="card-body">
+                        {{ $discussion->hasBestReply->content }}
+                        </div>
+                    </div>
+                @endif
                     <hr>
                     <b>Posted by : {{ $discussion->user->name }}</b>
                 </div>
@@ -19,6 +36,15 @@
             <div class="card">
                 <div class="card-header">
                 <b>Replied by : {{ $replies->user->name }} </b>
+                @if(auth()->user()->id === $discussion->user_id)
+
+                @if(!$discussion->hasBestReply)
+                <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $replies->id]) }}" method="post">
+                    @csrf 
+                    <button class="btn btn-sm btn-success float-right">Mark as best reply</button>
+                </form>
+                @endif
+                @endif
                 </div>
                 <div class="card-body">
                     {{ $replies->content }}
