@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Reply;
 use Illuminate\Support\Facades\Auth;
 use App\Discussion;
+use App\Notifications\NewReplyAdded;
 
 class ReplyController extends Controller
 {
@@ -42,6 +43,10 @@ class ReplyController extends Controller
             'discussion_id' => $discussion->id,
             'user_id' => Auth::id(),
         ]);
+
+        $discussion->user->notify(new NewReplyAdded($discussion));
+
+        session()->flash('success', 'Reply added');
 
         return redirect()->back();
     }
