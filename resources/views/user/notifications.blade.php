@@ -14,6 +14,7 @@
                             <li>
                                 @if($notification->type == 'App\Notifications\NewReplyAdded')
                                     A new reply was added to your discussion
+                                    <a href="" class="btn btn-sm btn-info float-right" >View Discussion</a>
                                 @endif
                             </li>
                         </ul>
