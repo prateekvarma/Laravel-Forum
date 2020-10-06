@@ -36,15 +36,17 @@
             <div class="card">
                 <div class="card-header">
                 <b>Replied by : {{ $replies->user->name }} </b>
-                @if(auth()->user()->id === $discussion->user_id)
+                @auth
+                    @if(auth()->user()->id === $discussion->user_id)
 
-                @if(!$discussion->hasBestReply)
-                <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $replies->id]) }}" method="post">
-                    @csrf 
-                    <button class="btn btn-sm btn-success float-right">Mark as best reply</button>
-                </form>
-                @endif
-                @endif
+                    @if(!$discussion->hasBestReply)
+                    <form action="{{ route('discussions.best-reply', ['discussion' => $discussion->slug, 'reply' => $replies->id]) }}" method="post">
+                        @csrf 
+                        <button class="btn btn-sm btn-success float-right">Mark as best reply</button>
+                    </form>
+                    @endif
+                    @endif
+                @endauth
                 </div>
                 <div class="card-body">
                     {{ $replies->content }}
