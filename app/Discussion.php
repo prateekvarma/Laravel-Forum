@@ -33,7 +33,8 @@ class Discussion extends Model
         ]);
         
         //send notification when marked best reply
-        $reply->user()->notify(new ReplyMarkedAsBestReply($reply->discussion));
+        //the 'user' below is a reference to the model relationship
+        $reply->user->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
     public function hasBestReply()
