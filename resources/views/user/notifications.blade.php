@@ -12,10 +12,17 @@
                     @foreach($notifications as $notification)
                         <ul>
                             <li>
+                            
                                 @if($notification->type == 'App\Notifications\NewReplyAdded')
                                     A new reply was added to your discussion
-                                    <a href="" class="btn btn-sm btn-info float-right" >View Discussion</a>
+                                    <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-info float-right" >View Discussion</a>
                                 @endif
+
+                                @if($notification->type == 'App\Notifications\ReplyMarkedAsBestReply')
+                                    Your reply was marked as best!
+                                    <a href="{{ route('discussions.show', $notification->data['discussion']['slug']) }}" class="btn btn-sm btn-info float-right" >View Discussion</a>
+                                @endif
+                            
                             </li>
                         </ul>
                     @endforeach

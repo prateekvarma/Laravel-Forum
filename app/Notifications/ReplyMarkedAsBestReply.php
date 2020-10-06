@@ -59,7 +59,7 @@ class ReplyMarkedAsBestReply extends Notification
     public function toArray($notifiable)
     {
         return [
-            $discussion = $this->discussion
+            'discussion' => $this->discussion
         ];
     }
 }
