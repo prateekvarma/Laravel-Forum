@@ -2,8 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Reply;
+use Illuminate\Database\Eloquent\Model;
+use App\Notifications\ReplyMarkedAsBestReply;
 
 class Discussion extends Model
 {
@@ -30,6 +31,9 @@ class Discussion extends Model
         $this->update([
             'reply_id' => $reply->id
         ]);
+        
+        //send notification when marked best reply
+        $reply->user()->notify(new ReplyMarkedAsBestReply($reply->discussion));
     }
 
     public function hasBestReply()
