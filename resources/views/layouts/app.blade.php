@@ -37,6 +37,10 @@
                         <li class="nav-item">
                             <a href="{{ route('users.notifications') }}" class="badge badge-success">{{ auth()->user()->unreadNotifications->count() }} Unread Notifications</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('discussions.index') }}">Discussions</a>
+                        </li>
                         @endauth
                     </ul>
 
